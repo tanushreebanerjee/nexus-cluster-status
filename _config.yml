@@ -2,7 +2,7 @@
 title: "UMD Nexus Cluster Status"
 description: "Real-time resource usage monitoring for UMIACS Nexus cluster partitions"
 baseurl: ""
-url: "https://yourusername.github.io"
+url: "https://tanushreebanerjee.github.io"
 
 # Authentication settings
 auth:
@@ -16,15 +16,8 @@ auth:
     
     # Authorization settings
     allowed_users:
-      - "your-github-username"
-      - "colleague-username"
-      # Add more GitHub usernames as needed
-    
-    allowed_organizations:
-      - "umiacs"
-      - "your-lab-org"
-      # Add GitHub organization names
-    
+      - "tanushreebanerjee"
+   
     # OAuth scopes required
     scope: "read:user read:org"
 
