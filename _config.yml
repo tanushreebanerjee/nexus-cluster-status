@@ -1,0 +1,35 @@
+# Site settings
+title: "UMD Nexus Cluster Status"
+description: "Real-time resource usage monitoring for UMIACS Nexus cluster partitions"
+baseurl: ""
+url: "https://yourusername.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Collections
+collections:
+  data:
+    output: false
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Custom settings
+refresh_interval: 10 # seconds
+last_updated_format: "%Y/%b/%-d %H:%M:%S"

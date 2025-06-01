@@ -1,0 +1,338 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    background-color: #000;
+    color: #fff;
+    overflow-x: auto;
+}
+
+.wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+    background-color: #111;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.site-title a {
+    color: #00ff00;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.site-nav {
+    float: right;
+    margin-top: 5px;
+}
+
+.site-nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.site-nav a:hover {
+    background-color: #333;
+}
+
+/* Main content */
+.page-content {
+    padding: 20px 0;
+    min-height: calc(100vh - 120px);
+}
+
+/* Cluster status styles */
+.cluster-status {
+    width: 100%;
+}
+
+.header-info {
+    background-color: #111;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.status-message {
+    margin: 0 20px;
+    color: #ccc;
+}
+
+.refresh-info {
+    float: right;
+    color: #00aaff;
+}
+
+.refresh-info a {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+.refresh-info a:hover {
+    text-decoration: underline;
+}
+
+/* Partition selector */
+.partition-selector {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #111;
+    border-radius: 5px;
+}
+
+.partition-selector label {
+    color: #00ff00;
+    margin-right: 10px;
+}
+
+.partition-selector select {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Nodes overview table */
+.nodes-overview {
+    margin-bottom: 30px;
+}
+
+.nodes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #111;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.nodes-table th,
+.nodes-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.nodes-table th {
+    background-color: #222;
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.nodes-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Partition sections */
+.partition-section {
+    margin-bottom: 30px;
+    background-color: #111;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.partition-section h3 {
+    color: #00ff00;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* User sections */
+.user-section {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #1a1a1a;
+    border-radius: 3px;
+}
+
+.current-user {
+    background-color: #2a1a1a;
+    border: 1px solid #444;
+}
+
+.user-header {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: center;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #00ff00;
+}
+
+.resource-headers {
+    display: grid;
+    grid-template-columns: 150px 100px 150px;
+    text-align: right;
+    gap: 20px;
+}
+
+.user-name-row {
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.current-user .user-name-row {
+    color: #ffff00;
+}
+
+/* Job rows */
+.job-row {
+    display: grid;
+    grid-template-columns: 300px 150px 100px 150px;
+    align-items: center;
+    padding: 2px 0;
+    gap: 20px;
+}
+
+.job-row .node-name {
+    color: #aaa;
+}
+
+.job-row .cpu-usage,
+.job-row .gpu-usage,
+.job-row .mem-usage {
+    text-align: right;
+    font-family: inherit;
+}
+
+/* Total row */
+.total-row {
+    display: grid;
+    grid-template-columns: 300px 150px 100px 150px;
+    align-items: center;
+    padding: 5px 0;
+    margin-top: 5px;
+    border-top: 1px solid #333;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.total-row .total-label {
+    color: #00ff00;
+}
+
+.total-row .cpu-total,
+.total-row .gpu-total,
+.total-row .mem-total {
+    text-align: right;
+}
+
+/* Usage percentage styling */
+.job-row span:nth-child(2),
+.job-row span:nth-child(3),
+.job-row span:nth-child(4),
+.total-row span:nth-child(2),
+.total-row span:nth-child(3),
+.total-row span:nth-child(4) {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Footer */
+.site-footer {
+    background-color: #111;
+    padding: 15px 0;
+    border-top: 1px solid #333;
+    margin-top: 40px;
+}
+
+.site-footer p {
+    text-align: center;
+    color: #666;
+    font-size: 11px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        font-size: 10px;
+    }
+    
+    .wrapper {
+        padding: 0 10px;
+    }
+    
+    .site-nav {
+        float: none;
+        margin-top: 10px;
+    }
+    
+    .user-header,
+    .job-row,
+    .total-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    
+    .resource-headers {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+    
+    .job-row .cpu-usage,
+    .job-row .gpu-usage,
+    .job-row .mem-usage,
+    .total-row .cpu-total,
+    .total-row .gpu-total,
+    .total-row .mem-total {
+        text-align: left;
+    }
+    
+    .nodes-table {
+        font-size: 10px;
+    }
+    
+    .nodes-table th,
+    .nodes-table td {
+        padding: 5px;
+    }
+}
+
+/* Dark mode enhancements */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* Animation for refresh */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.refreshing {
+    animation: pulse 1s infinite;
+}

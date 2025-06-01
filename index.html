@@ -1,0 +1,216 @@
+---
+layout: default
+title: "Nexus Cluster Status"
+---
+
+<div class="cluster-status">
+    <div class="header-info">
+        <span id="last-updated">Updated 2025/Jun/1 0:20:12 (71 seconds ago).</span>
+        <span class="status-message">If the site is down, I already know. Only ping me if the info here is incorrect.</span>
+        <span class="refresh-info">
+            <a href="#" id="refresh-link">Refresh</a> in <span id="countdown">10</span> seconds!
+        </span>
+    </div>
+
+    <div class="partition-selector">
+        <label for="partition-select">Select Partition:</label>
+        <select id="partition-select">
+            <option value="all">All Partitions</option>
+            <option value="pci">PCI Partition</option>
+            <option value="tron">Tron Partition</option>
+            <option value="scavenger">Scavenger Partition</option>
+            <option value="cbcb">CBCB Partition</option>
+            <option value="clip">CLIP Partition</option>
+        </select>
+    </div>
+
+    <div id="cluster-data">
+        <!-- Node overview section -->
+        <div class="nodes-overview" id="nodes-overview">
+            <table class="nodes-table">
+                <thead>
+                    <tr>
+                        <th>Node</th>
+                        <th>Available CPU</th>
+                        <th>Available GPU</th>
+                        <th>Unrequested Mem</th>
+                        <th>Actual Free Mem</th>
+                    </tr>
+                </thead>
+                <tbody id="nodes-tbody">
+                    <!-- Nodes will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Partition sections -->
+        <div id="partitions-container">
+            <!-- Partitions will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<script>
+// Sample data structure - replace with actual data source
+const clusterData = {
+    lastUpdated: "2025/Jun/1 0:20:12",
+    nodes: [
+        { name: "node209", cpu: "0/104", gpu: "0/10", unreqMem: "402G", freeMem: "28G", status: "draining", type: "A6000" },
+        { name: "node300", cpu: "0/104", gpu: "0/10", unreqMem: "403G", freeMem: "6G", status: "draining", type: "A6000" },
+        { name: "node301", cpu: "0/104", gpu: "0/10", unreqMem: "403G", freeMem: "36G", status: "draining", type: "A6000" }
+    ],
+    partitions: {
+        pci: {
+            users: [
+                {
+                    name: "tb21 (Tanushree Banerjee)",
+                    isCurrentUser: true,
+                    jobs: [
+                        { node: "node209", cpu: "20 (19%)", gpu: "10 (100%)", mem: "100G (20%)" },
+                        { node: "node300", cpu: "20 (19%)", gpu: "10 (100%)", mem: "100G (20%)" },
+                        { node: "node301", cpu: "20 (19%)", gpu: "10 (100%)", mem: "100G (20%)" }
+                    ],
+                    total: { cpu: "60 (1%)", gpu: "30 (4%)", mem: "300G (1%)" }
+                }
+            ]
+        },
+        pnlp: {
+            users: [
+                {
+                    name: "cj7280",
+                    jobs: [
+                        { node: "node012", cpu: "10 (16%)", gpu: "1 (13%)", mem: "100G (27%)" },
+                        { node: "node806", cpu: "10 (25%)", gpu: "1 (10%)", mem: "100G (40%)" }
+                    ],
+                    total: { cpu: "20 (0%)", gpu: "2 (0%)", mem: "200G (1%)" }
+                }
+            ]
+        }
+    }
+};
+
+// Countdown timer
+let countdownSeconds = 10;
+let countdownInterval;
+
+function startCountdown() {
+    countdownInterval = setInterval(() => {
+        countdownSeconds--;
+        document.getElementById('countdown').textContent = countdownSeconds;
+        
+        if (countdownSeconds <= 0) {
+            refreshData();
+            countdownSeconds = 10;
+        }
+    }, 1000);
+}
+
+function refreshData() {
+    // In a real implementation, this would fetch new data
+    console.log('Refreshing data...');
+    updateDisplay();
+}
+
+function updateDisplay() {
+    const selectedPartition = document.getElementById('partition-select').value;
+    
+    // Update nodes overview
+    updateNodesTable();
+    
+    // Update partitions
+    updatePartitionsDisplay(selectedPartition);
+}
+
+function updateNodesTable() {
+    const tbody = document.getElementById('nodes-tbody');
+    tbody.innerHTML = '';
+    
+    clusterData.nodes.forEach(node => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${node.name} (${node.type}) (${node.status})</td>
+            <td>${node.cpu}</td>
+            <td>${node.gpu}</td>
+            <td>${node.unreqMem}</td>
+            <td>${node.freeMem}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+function updatePartitionsDisplay(selectedPartition) {
+    const container = document.getElementById('partitions-container');
+    container.innerHTML = '';
+    
+    const partitionsToShow = selectedPartition === 'all' 
+        ? Object.keys(clusterData.partitions)
+        : [selectedPartition].filter(p => clusterData.partitions[p]);
+    
+    partitionsToShow.forEach(partitionName => {
+        const partition = clusterData.partitions[partitionName];
+        if (!partition) return;
+        
+        const partitionDiv = document.createElement('div');
+        partitionDiv.className = 'partition-section';
+        partitionDiv.innerHTML = createPartitionHTML(partitionName, partition);
+        container.appendChild(partitionDiv);
+    });
+}
+
+function createPartitionHTML(partitionName, partition) {
+    let html = `<h3>Slurm Account: ${partitionName}</h3>`;
+    
+    partition.users.forEach(user => {
+        html += `
+            <div class="user-section ${user.isCurrentUser ? 'current-user' : ''}">
+                <div class="user-header">
+                    <span class="user-name">User</span>
+                    <span class="resource-headers">
+                        <span class="cpu-header">CPU</span>
+                        <span class="gpu-header">GPU</span>
+                        <span class="mem-header">Requested Mem</span>
+                    </span>
+                </div>
+                <div class="user-name-row">
+                    ${user.name} ${user.isCurrentUser ? '<--- ME' : ''}
+                </div>
+        `;
+        
+        user.jobs.forEach(job => {
+            html += `
+                <div class="job-row">
+                    <span class="node-name">--${job.node}</span>
+                    <span class="cpu-usage">${job.cpu}</span>
+                    <span class="gpu-usage">${job.gpu}</span>
+                    <span class="mem-usage">${job.mem}</span>
+                </div>
+            `;
+        });
+        
+        html += `
+                <div class="total-row">
+                    <span class="total-label">total</span>
+                    <span class="cpu-total">${user.total.cpu}</span>
+                    <span class="gpu-total">${user.total.gpu}</span>
+                    <span class="mem-total">${user.total.mem}</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    return html;
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('partition-select').addEventListener('change', updateDisplay);
+    document.getElementById('refresh-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        refreshData();
+        countdownSeconds = 10;
+    });
+    
+    updateDisplay();
+    startCountdown();
+});
+</script>

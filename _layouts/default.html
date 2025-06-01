@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrapper">
+            <h1 class="site-title">
+                <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+            </h1>
+            <nav class="site-nav">
+                <a href="{{ '/' | relative_url }}">Dashboard</a>
+                <a href="{{ '/partitions' | relative_url }}">Partitions</a>
+                <a href="{{ '/about' | relative_url }}">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <div class="wrapper">
+            {{ content }}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrapper">
+            <p>&copy; {{ 'now' | date: "%Y" }} UMIACS Nexus Cluster Status</p>
+        </div>
+    </footer>
+</body>
+</html>
