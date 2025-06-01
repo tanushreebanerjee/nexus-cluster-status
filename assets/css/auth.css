@@ -1,0 +1,291 @@
+/* Authentication UI Styles */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.auth-card {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 255, 0, 0.1);
+    text-align: center;
+}
+
+.auth-card.error {
+    border-color: #ff4444;
+    box-shadow: 0 10px 30px rgba(255, 68, 68, 0.1);
+}
+
+.auth-header h1 {
+    color: #00ff00;
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.auth-header p {
+    color: #ccc;
+    margin: 0 0 30px 0;
+    font-size: 14px;
+}
+
+.auth-content {
+    margin: 30px 0;
+}
+
+.auth-content p {
+    color: #aaa;
+    margin: 15px 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.login-btn {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.login-btn:hover {
+    background: #2ea043;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.logout-btn {
+    background: #da3633;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #f85149;
+}
+
+.auth-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+.auth-footer small {
+    color: #666;
+    font-size: 11px;
+}
+
+/* Header bar for authenticated users */
+.auth-header-bar {
+    background: #111;
+    border-bottom: 1px solid #333;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00ff00;
+    font-size: 12px;
+}
+
+.user-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #555;
+}
+
+/* Loading states */
+.auth-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    border-top-color: #00ff00;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error states */
+.auth-error {
+    background: #2d1b1b;
+    border: 1px solid #ff4444;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    color: #ffaaaa;
+    font-size: 12px;
+}
+
+/* Success states */
+.auth-success {
+    background: #1b2d1b;
+    border: 1px solid #44ff44;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    color: #aaffaa;
+    font-size: 12px;
+}
+
+/* Token input for simple auth */
+.token-input {
+    background: #222;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 10px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.token-input:focus {
+    outline: none;
+    border-color: #00ff00;
+    box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.2);
+}
+
+.token-input::placeholder {
+    color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .auth-header h1 {
+        font-size: 20px;
+    }
+    
+    .login-btn {
+        width: 100%;
+    }
+    
+    .auth-header-bar {
+        padding: 8px 15px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .user-info {
+        font-size: 11px;
+    }
+    
+    .user-avatar {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Dark mode enhancements for auth */
+@media (prefers-color-scheme: dark) {
+    .auth-container {
+        background: linear-gradient(135deg, #000 0%, #0a0a0a 50%, #000 100%);
+    }
+}
+
+/* Animation for page transitions */
+.auth-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Permission denied styling */
+.permission-denied {
+    border-color: #ff6b6b;
+    background: #2d1a1a;
+}
+
+.permission-denied .auth-header h1 {
+    color: #ff6b6b;
+}
+
+/* GitHub-specific styling */
+.github-login-btn svg {
+    fill: currentColor;
+}
+
+/* Status indicators */
+.auth-status {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.auth-status.connected {
+    background: #00ff00;
+}
+
+.auth-status.disconnected {
+    background: #ff4444;
+}
+
+.auth-status.pending {
+    background: #ffaa00;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

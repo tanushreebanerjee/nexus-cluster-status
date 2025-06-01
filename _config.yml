@@ -4,6 +4,37 @@ description: "Real-time resource usage monitoring for UMIACS Nexus cluster parti
 baseurl: ""
 url: "https://yourusername.github.io"
 
+# Authentication settings
+auth:
+  enabled: true
+  provider: "github"
+  
+  # GitHub OAuth settings (you'll need to create a GitHub App)
+  github:
+    client_id: "your_github_app_client_id"
+    # Client secret should be handled server-side or via serverless function
+    
+    # Authorization settings
+    allowed_users:
+      - "your-github-username"
+      - "colleague-username"
+      # Add more GitHub usernames as needed
+    
+    allowed_organizations:
+      - "umiacs"
+      - "your-lab-org"
+      # Add GitHub organization names
+    
+    # OAuth scopes required
+    scope: "read:user read:org"
+
+# Alternative: Simple token-based auth (less secure but easier)
+simple_auth:
+  enabled: false
+  tokens:
+    - "nexus-admin-2024"
+    - "lab-member-access"
+  
 # Build settings
 markdown: kramdown
 highlighter: rouge
@@ -29,7 +60,16 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - README.md
+  - environment.yml
+  - setup.sh
 
 # Custom settings
 refresh_interval: 10 # seconds
 last_updated_format: "%Y/%b/%-d %H:%M:%S"
+
+# Security headers (for GitHub Pages)
+safe: true
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false

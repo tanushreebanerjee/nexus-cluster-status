@@ -1,0 +1,46 @@
+name: nexus-cluster-status
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python and core packages
+  - python=3.11
+  - pip
+  
+  # Web development
+  - flask=2.3.*
+  - requests=2.31.*
+  - jinja2=3.1.*
+  
+  # Data processing
+  - pandas=2.0.*
+  - numpy=1.24.*
+  - python-dateutil=2.8.*
+  
+  # CLI and utilities
+  - click=8.1.*
+  - pyyaml=6.0.*
+  - jsonschema=4.17.*
+  
+  # Development tools
+  - pytest=7.4.*
+  - black=23.7.*
+  - flake8=6.0.*
+  - pre-commit=3.3.*
+  
+  # Ruby/Jekyll (if you want to run Jekyll locally)
+  - ruby=3.1.*
+  
+  # System utilities
+  - cron
+  - curl
+  - git
+  
+  # Pip-only packages
+  - pip:
+    - flask-cors==4.0.*
+    - schedule==1.2.*
+    - python-crontab==2.7.*
+    
+# Optional: specify the prefix for the environment location
+# prefix: /path/to/your/conda/envs/nexus-cluster-status
